@@ -71,11 +71,6 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-credit-cards-api</artifactId>
 			<version>1.0.0</version>
