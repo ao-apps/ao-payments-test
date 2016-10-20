@@ -32,7 +32,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 
 	<groupId>com.aoindustries</groupId>
 	<artifactId>ao-credit-cards-test</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>AO Credit Cards Test</name>
@@ -44,7 +44,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 		<connection>scm:git:git://github.com/aoindustries/ao-credit-cards-test.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/ao-credit-cards-test.git</developerConnection>
 		<url>http://github.com/aoindustries/ao-credit-cards-test</url>
-		<tag>HEAD</tag>
+		<tag>ao-credit-cards-test-1.0.1</tag>
 	</scm>
 
 	<profiles>
