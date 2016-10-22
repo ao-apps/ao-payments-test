@@ -27,7 +27,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 	<parent>
 		<groupId>com.aoindustries</groupId>
 		<artifactId>ao-credit-cards</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 
 	<groupId>com.aoindustries</groupId>
@@ -43,7 +43,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 	<scm>
 		<connection>scm:git:git://github.com/aoindustries/ao-credit-cards-test.git</connection>
 		<developerConnection>scm:git:git@github.com:aoindustries/ao-credit-cards-test.git</developerConnection>
-		<url>http://github.com/aoindustries/ao-credit-cards-test</url>
+		<url>https://github.com/aoindustries/ao-credit-cards-test</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -105,12 +105,12 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-credit-cards-api</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>aocode-public</artifactId>
-			<version>1.8.2</version>
+			<version>1.8.3-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
