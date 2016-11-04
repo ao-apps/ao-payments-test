@@ -41,7 +41,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 	</properties>
 
 	<name>AO Credit Cards Test</name>
-	<url>https://www.aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
+	<url>https://aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
 	<description>Provider for testing software.</description>
 	<inceptionYear>2007</inceptionYear>
 
@@ -64,8 +64,8 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 							<artifactId>maven-javadoc-plugin</artifactId>
 							<configuration>
 								<links>
-									<link>https://www.aoindustries.com/ao-credit-cards/api/apidocs/</link>
-									<link>https://www.aoindustries.com/aocode-public/apidocs/</link>
+									<link>https://aoindustries.com/ao-credit-cards/api/apidocs/</link>
+									<link>https://aoindustries.com/aocode-public/apidocs/</link>
 								</links>
 							</configuration>
 						</plugin>
