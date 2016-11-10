@@ -36,12 +36,11 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>jar</packaging>
 
 	<properties>
-		<bookPath>/${project.parent.artifactId}/test</bookPath>
 		<shortTitle>Test</shortTitle>
 	</properties>
 
 	<name>AO Credit Cards Test</name>
-	<url>https://aoindustries.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
+	<url>https://aoindustries.com/${project.parent.artifactId}/test/</url>
 	<description>Provider for testing software.</description>
 	<inceptionYear>2007</inceptionYear>
 
