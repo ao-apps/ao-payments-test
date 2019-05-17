@@ -133,6 +133,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 					null,
 					null,
 					null,
+					null,
+					null,
 					null
 				),
 				new CaptureResult(
@@ -163,6 +165,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 					null,
 					null,
 					providerUniqueId,
+					null,
+					null,
 					null,
 					AuthorizationResult.ApprovalResult.DECLINED,
 					null,
@@ -209,6 +213,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 				null,
 				null,
 				providerUniqueId,
+				null,
+				null,
 				null,
 				AuthorizationResult.ApprovalResult.APPROVED,
 				null,
@@ -276,6 +282,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 				null,
 				null,
 				null,
+				null,
+				null,
 				null
 			);
 		}
@@ -296,6 +304,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 				null,
 				null,
 				providerUniqueId,
+				null,
+				null,
 				null,
 				AuthorizationResult.ApprovalResult.DECLINED,
 				null,
@@ -332,6 +342,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 			null,
 			null,
 			providerUniqueId,
+			null,
+			null,
 			null,
 			AuthorizationResult.ApprovalResult.APPROVED,
 			null,
