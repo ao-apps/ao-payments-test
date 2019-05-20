@@ -37,7 +37,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-29T19:09:54-0500"
-		dateModified="2019-04-29T18:25:46-0500"
+		dateModified="2019-05-19T22:58:30-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.aoindustries:ao-credit-cards-test:pom.version}" />
@@ -55,7 +55,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 			>
 				<ul>
 					<li>Minimum Java version changed from 1.6 to 1.7.</li>
-					<li>Please note: the next release of this project will be renamed to <code>ao-payment-test</code>.</li>
+					<li>Please note: the next major release of this project will be renamed to <code>ao-payment-test</code>.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
