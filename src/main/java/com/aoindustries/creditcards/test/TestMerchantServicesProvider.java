@@ -28,11 +28,14 @@ import com.aoindustries.creditcards.CreditCard;
 import com.aoindustries.creditcards.CreditResult;
 import com.aoindustries.creditcards.MerchantServicesProvider;
 import com.aoindustries.creditcards.SaleResult;
+import com.aoindustries.creditcards.TokenizedCreditCard;
 import com.aoindustries.creditcards.Transaction;
 import com.aoindustries.creditcards.TransactionRequest;
 import com.aoindustries.creditcards.TransactionResult;
 import com.aoindustries.creditcards.VoidResult;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -479,7 +482,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	}
 
 	@Override
-	public boolean canStoreCreditCards() throws IOException {
+	public boolean canStoreCreditCards() {
 		return true;
 	}
 
@@ -523,5 +526,15 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	public void deleteCreditCard(CreditCard creditCard) throws IOException {
 		// First allow for random errors
 		if(random.nextInt(100)<errorChance) throw new IOException("Test-mode simulated deleteCreditCard error");
+	}
+
+	@Override
+	public boolean canGetTokenizedCreditCards() {
+		return false;
+	}
+
+	@Override
+	public Map<String, TokenizedCreditCard> getTokenizedCreditCards(Map<String,CreditCard> persistedCards, PrintWriter verboseOut, PrintWriter infoOut, PrintWriter warningOut) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException();
 	}
 }
