@@ -37,7 +37,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 / <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
 		<shortTitle>Test</shortTitle>
 		<!-- Dependencies -->
-		<org.apache.commons:commons-lang3:version>3.9</org.apache.commons:commons-lang3:version>
+		<org.apache.commons.commons-lang3.version>3.9</org.apache.commons.commons-lang3.version>
 	</properties>
 
 	<name>AO Credit Cards Test</name>
@@ -65,7 +65,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 								<link>${javadoc.link.javase}</link>
 								<!-- Direct -->
 								<link>https://aoindustries.com/ao-credit-cards/api/apidocs/</link>
-								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-${org.apache.commons:commons-lang3:version}/</link>
+								<link>https://commons.apache.org/proper/commons-lang/javadocs/api-${org.apache.commons.commons-lang3.version}/</link>
 							</links>
 						</configuration>
 					</plugin>
@@ -81,7 +81,7 @@ along with ao-credit-cards-test.  If not, see <http://www.gnu.org/licenses />.
 				<groupId>com.aoindustries</groupId><artifactId>ao-credit-cards-api</artifactId><version>1.1.2-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${org.apache.commons:commons-lang3:version}</version>
+				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${org.apache.commons.commons-lang3.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
