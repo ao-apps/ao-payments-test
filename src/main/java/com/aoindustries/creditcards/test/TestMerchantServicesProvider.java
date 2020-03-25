@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Random;
+import org.apache.commons.lang3.NotImplementedException;
 
 /**
  * Provider for testing software.
@@ -452,9 +453,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public CreditResult credit(TransactionRequest transactionRequest, CreditCard creditCard) {
-		throw new com.aoindustries.exception.NotImplementedException();
+		throw new NotImplementedException("TODO");
 	}
 
 	@Override
