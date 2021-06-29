@@ -33,6 +33,7 @@ along with ao-payments-test.  If not, see <http://www.gnu.org/licenses />.
 	<packaging>bundle</packaging>
 
 	<properties>
+		<module.name>com.aoapps.payments.test</module.name>
 		<javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
 / <a target="${javadoc.target}" href="https://oss.aoapps.com/payments/">Payments</a>
 / <a target="${javadoc.target}" href="${project.url}">Test</a>]]></javadoc.breadcrumbs>
@@ -79,6 +80,20 @@ along with ao-payments-test.  If not, see <http://www.gnu.org/licenses />.
 		<system>GitHub Issues</system>
 		<url>https://github.com/aoindustries/ao-payments-test/issues</url>
 	</issueManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<ignoredDependencies>
+						<!-- No "module-info.java" in some release builds -->
+						<dependency>com.aoapps:ao-collections</dependency>
+					</ignoredDependencies>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<profiles>
 		<profile>
