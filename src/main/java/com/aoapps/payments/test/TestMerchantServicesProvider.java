@@ -162,7 +162,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 			AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
 
 			// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-			String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
+			String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
 			return new SaleResult(
 				new AuthorizationResult(
@@ -199,7 +199,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		// Simulate success
 
 		// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-		String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
+		String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
 		String approvalCode =
 			new StringBuilder()
@@ -299,7 +299,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 			AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
 
 			// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-			String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
+			String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
 			return new AuthorizationResult(
 				getProviderId(),
@@ -326,7 +326,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		// Simulate success
 
 		// Random doesn't ensure uniquiness - but this is an easy implementation not requiring persistence
-		String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
+		String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
 		String approvalCode =
 			new StringBuilder()
@@ -471,7 +471,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		// First allow for random errors
 		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated storeCreditCard error");
 
-		return Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
+		return Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 	}
 
 	@Override
