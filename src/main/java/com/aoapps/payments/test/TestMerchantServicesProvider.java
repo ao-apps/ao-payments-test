@@ -22,6 +22,7 @@
  */
 package com.aoapps.payments.test;
 
+import com.aoapps.lang.io.IoUtils;
 import com.aoapps.payments.AuthorizationResult;
 import com.aoapps.payments.CaptureResult;
 import com.aoapps.payments.CreditCard;
@@ -35,6 +36,7 @@ import com.aoapps.payments.TransactionResult;
 import com.aoapps.payments.VoidResult;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Random;
 import org.apache.commons.lang3.NotImplementedException;
@@ -55,8 +57,10 @@ import org.apache.commons.lang3.NotImplementedException;
  */
 public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
-	/** Shared by all instances */
-	private static final Random random = new Random();
+	/**
+	 * A fast pseudo-random number generator for non-cryptographic purposes.
+	 */
+	private static final Random fastRandom = new Random(IoUtils.bufferToLong(new SecureRandom().generateSeed(Long.BYTES)));
 
 	private final String providerId;
 	private final byte errorChance;
@@ -95,10 +99,10 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	@Override
 	public SaleResult sale(TransactionRequest transactionRequest, CreditCard creditCard) {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) {
+		if(fastRandom.nextInt(100) < errorChance) {
 			// Random error class
 			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = random.nextInt(3);
+			int randomInt = fastRandom.nextInt(3);
 			switch(randomInt) {
 				case 0: {
 					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
@@ -117,7 +121,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
 			// Random error code
 			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[random.nextInt(values.length)];
+			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
 			return new SaleResult(
 				new AuthorizationResult(
@@ -152,13 +156,13 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		}
 
 		// Second allow for declines
-		if(random.nextInt(100)<declineChance) {
+		if(fastRandom.nextInt(100) < declineChance) {
 			// Random decline reason
 			AuthorizationResult.DeclineReason[] values = AuthorizationResult.DeclineReason.values();
-			AuthorizationResult.DeclineReason declineReason = values[random.nextInt(values.length)];
+			AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
 
 			// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-			String providerUniqueId = Long.toString(Math.abs(random.nextLong()), 16).toUpperCase();
+			String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
 
 			return new SaleResult(
 				new AuthorizationResult(
@@ -195,16 +199,16 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		// Simulate success
 
 		// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-		String providerUniqueId = Long.toString(Math.abs(random.nextLong()), 16).toUpperCase();
+		String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
 
 		String approvalCode =
 			new StringBuilder()
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
 				.toString();
 
 		return new SaleResult(
@@ -242,10 +246,10 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	@Override
 	public AuthorizationResult authorize(TransactionRequest transactionRequest, CreditCard creditCard) {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) {
+		if(fastRandom.nextInt(100) < errorChance) {
 			// Random error class
 			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = random.nextInt(3);
+			int randomInt = fastRandom.nextInt(3);
 			switch(randomInt) {
 				case 0: {
 					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
@@ -264,7 +268,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
 			// Random error code
 			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[random.nextInt(values.length)];
+			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
 			return new AuthorizationResult(
 				getProviderId(),
@@ -289,13 +293,13 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		}
 
 		// Second allow for declines
-		if(random.nextInt(100)<declineChance) {
+		if(fastRandom.nextInt(100) < declineChance) {
 			// Random decline reason
 			AuthorizationResult.DeclineReason[] values = AuthorizationResult.DeclineReason.values();
-			AuthorizationResult.DeclineReason declineReason = values[random.nextInt(values.length)];
+			AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
 
 			// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-			String providerUniqueId = Long.toString(Math.abs(random.nextLong()), 16).toUpperCase();
+			String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
 
 			return new AuthorizationResult(
 				getProviderId(),
@@ -322,16 +326,16 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		// Simulate success
 
 		// Random doesn't ensure uniquiness - but this is an easy implementation not requiring persistence
-		String providerUniqueId = Long.toString(Math.abs(random.nextLong()), 16).toUpperCase();
+		String providerUniqueId = Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
 
 		String approvalCode =
 			new StringBuilder()
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
-				.append(random.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
+				.append(fastRandom.nextInt(10))
 				.toString();
 
 		return new AuthorizationResult(
@@ -359,10 +363,10 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	@Override
 	public CaptureResult capture(AuthorizationResult authorizationResult) {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) {
+		if(fastRandom.nextInt(100) < errorChance) {
 			// Random error class
 			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = random.nextInt(3);
+			int randomInt = fastRandom.nextInt(3);
 			switch(randomInt) {
 				case 0: {
 					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
@@ -381,7 +385,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
 			// Random error code
 			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[random.nextInt(values.length)];
+			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
 			return new CaptureResult(
 				getProviderId(),
@@ -407,10 +411,10 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	@Override
 	public VoidResult voidTransaction(Transaction transaction) {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) {
+		if(fastRandom.nextInt(100) < errorChance) {
 			// Random error class
 			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = random.nextInt(3);
+			int randomInt = fastRandom.nextInt(3);
 			switch(randomInt) {
 				case 0: {
 					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
@@ -429,7 +433,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
 			// Random error code
 			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[random.nextInt(values.length)];
+			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
 			return new VoidResult(
 				getProviderId(),
@@ -465,15 +469,15 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 	@Override
 	public String storeCreditCard(CreditCard creditCard) throws IOException {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) throw new IOException("Test-mode simulated storeCreditCard error");
+		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated storeCreditCard error");
 
-		return Long.toString(Math.abs(random.nextLong()), 16).toUpperCase();
+		return Long.toString(Math.abs(fastRandom.nextLong()), 16).toUpperCase();
 	}
 
 	@Override
 	public void updateCreditCard(CreditCard creditCard) throws IOException {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) throw new IOException("Test-mode simulated updateCreditCard error");
+		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated updateCreditCard error");
 	}
 
 	@Override
@@ -485,7 +489,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		String cardCode
 	) throws IOException {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) throw new IOException("Test-mode simulated updateCreditCardNumberAndExpiration error");
+		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated updateCreditCardNumberAndExpiration error");
 	}
 
 	@Override
@@ -495,13 +499,13 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 		short expirationYear
 	) throws IOException {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) throw new IOException("Test-mode simulated updateCreditCardExpiration error");
+		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated updateCreditCardExpiration error");
 	}
 
 	@Override
 	public void deleteCreditCard(CreditCard creditCard) throws IOException {
 		// First allow for random errors
-		if(random.nextInt(100)<errorChance) throw new IOException("Test-mode simulated deleteCreditCard error");
+		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated deleteCreditCard error");
 	}
 
 	@Override
