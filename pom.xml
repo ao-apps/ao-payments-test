@@ -22,227 +22,227 @@ You should have received a copy of the GNU Lesser General Public License
 along with ao-payments-test.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.aoapps</groupId><artifactId>ao-oss-parent</artifactId><version>1.18.0-SNAPSHOT</version>
-		<relativePath>../../parent/pom.xml</relativePath>
-	</parent>
+  <parent>
+    <groupId>com.aoapps</groupId><artifactId>ao-oss-parent</artifactId><version>1.18.0-SNAPSHOT</version>
+    <relativePath>../../parent/pom.xml</relativePath>
+  </parent>
 
-	<groupId>com.aoapps</groupId><artifactId>ao-payments-test</artifactId><version>2.0.0-POST-SNAPSHOT</version>
-	<packaging>bundle</packaging>
+  <groupId>com.aoapps</groupId><artifactId>ao-payments-test</artifactId><version>2.0.0-POST-SNAPSHOT</version>
+  <packaging>bundle</packaging>
 
-	<properties>
-		<module.name>com.aoapps.payments.test</module.name>
-		<javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
+  <properties>
+    <module.name>com.aoapps.payments.test</module.name>
+    <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://oss.aoapps.com/">AO OSS</a>
 / <a target="${javadoc.target}" href="https://oss.aoapps.com/payments/">Payments</a>
 / <a target="${javadoc.target}" href="${project.url}">Test</a>]]></javadoc.breadcrumbs>
-		<!-- SonarQube -->
-		<sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
-		<sonar.organization>ao-apps</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<!-- TODO: Implement tests -->
-		<sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
-		<!-- Dependencies -->
-		<commons-lang3.version>3.12.0</commons-lang3.version>
-	</properties>
+    <!-- SonarQube -->
+    <sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
+    <sonar.organization>ao-apps</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <!-- TODO: Implement tests -->
+    <sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>
+    <!-- Dependencies -->
+    <commons-lang3.version>3.12.0</commons-lang3.version>
+  </properties>
 
-	<name>AO Payments Test</name>
-	<url>https://oss.aoapps.com/payments/test/</url>
-	<description>Provider for testing software.</description>
-	<inceptionYear>2007</inceptionYear>
+  <name>AO Payments Test</name>
+  <url>https://oss.aoapps.com/payments/test/</url>
+  <description>Provider for testing software.</description>
+  <inceptionYear>2007</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>GNU General Lesser Public License (LGPL) version 3.0</name>
-			<url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+  <licenses>
+    <license>
+      <name>GNU General Lesser Public License (LGPL) version 3.0</name>
+      <url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-	<organization>
-		<name>AO Industries, Inc.</name>
-		<url>https://aoindustries.com/</url>
-	</organization>
+  <organization>
+    <name>AO Industries, Inc.</name>
+    <url>https://aoindustries.com/</url>
+  </organization>
 
-	<developers>
-		<developer>
-			<name>AO Industries, Inc.</name>
-			<email>support@aoindustries.com</email>
-			<url>https://aoindustries.com/</url>
-			<organization>AO Industries, Inc.</organization>
-			<organizationUrl>https://aoindustries.com/</organizationUrl>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <name>AO Industries, Inc.</name>
+      <email>support@aoindustries.com</email>
+      <url>https://aoindustries.com/</url>
+      <organization>AO Industries, Inc.</organization>
+      <organizationUrl>https://aoindustries.com/</organizationUrl>
+    </developer>
+  </developers>
 
-	<scm>
-		<connection>scm:git:git://github.com/ao-apps/ao-payments-test.git</connection>
-		<developerConnection>scm:git:git@github.com:ao-apps/ao-payments-test.git</developerConnection>
-		<url>https://github.com/ao-apps/ao-payments-test</url>
-		<tag>HEAD</tag>
-	</scm>
+  <scm>
+    <connection>scm:git:git://github.com/ao-apps/ao-payments-test.git</connection>
+    <developerConnection>scm:git:git@github.com:ao-apps/ao-payments-test.git</developerConnection>
+    <url>https://github.com/ao-apps/ao-payments-test</url>
+    <tag>HEAD</tag>
+  </scm>
 
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/ao-apps/ao-payments-test/issues</url>
-	</issueManagement>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/ao-apps/ao-payments-test/issues</url>
+  </issueManagement>
 
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://jenkins.aoindustries.com/job/ao/job/oss/job/payments/job/test/</url>
-	</ciManagement>
-	<!-- Only one allowed in POM:
-	<ciManagement>
-		<system>GitHub Actions</system>
-		<url>https://github.com/ao-apps/ao-payments-test/actions</url>
-	</ciManagement>
-	-->
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://jenkins.aoindustries.com/job/ao/job/oss/job/payments/job/test/</url>
+  </ciManagement>
+  <!-- Only one allowed in POM:
+  <ciManagement>
+    <system>GitHub Actions</system>
+    <url>https://github.com/ao-apps/ao-payments-test/actions</url>
+  </ciManagement>
+  -->
 
-	<repositories>
-		<!-- Repository required here, too, so can find parent -->
-		<repository>
-			<id>sonatype-nexus-snapshots-s01</id>
-			<name>Sonatype Nexus Snapshots S01</name>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<checksumPolicy>fail</checksumPolicy>
-			</snapshots>
-		</repository>
-	</repositories>
+  <repositories>
+    <!-- Repository required here, too, so can find parent -->
+    <repository>
+      <id>sonatype-nexus-snapshots-s01</id>
+      <name>Sonatype Nexus Snapshots S01</name>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <checksumPolicy>fail</checksumPolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
-				<configuration>
-					<ignoredDependencies>
-						<!-- No "module-info.java" in some release builds -->
-						<dependency>com.aoapps:ao-collections</dependency>
-					</ignoredDependencies>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId><artifactId>maven-checkstyle-plugin</artifactId>
-				<configuration>
-					<!-- TODO: Clean-up Checkstyle -->
-					<failOnViolation>false</failOnViolation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.github.spotbugs</groupId><artifactId>spotbugs-maven-plugin</artifactId>
-				<configuration>
-					<!-- TODO: Clean-up SpotBugs -->
-					<failOnError>false</failOnError>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <ignoredDependencies>
+            <!-- No "module-info.java" in some release builds -->
+            <dependency>com.aoapps:ao-collections</dependency>
+          </ignoredDependencies>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <!-- TODO: Clean-up Checkstyle -->
+          <failOnViolation>false</failOnViolation>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId><artifactId>spotbugs-maven-plugin</artifactId>
+        <configuration>
+          <!-- TODO: Clean-up SpotBugs -->
+          <failOnError>false</failOnError>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-	<profiles>
-		<profile>
-			<id>offlineLinks</id><activation><file><exists>src/main/java</exists></file></activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>unpack.offlineLinks</id><phase>prepare-package</phase><goals><goal>unpack</goal></goals>
-								<configuration>
-									<artifactItems>
-										<!-- Direct -->
-										<artifactItem>
-											<groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId><classifier>javadoc</classifier>
-											<includes>element-list, package-list</includes>
-											<outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-lang</outputDirectory>
-										</artifactItem>
-										<artifactItem>
-											<groupId>com.aoapps</groupId><artifactId>ao-payments-api</artifactId><classifier>javadoc</classifier>
-											<includes>element-list, package-list</includes>
-											<outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-payments-api</outputDirectory>
-										</artifactItem>
-										<artifactItem>
-											<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><classifier>javadoc</classifier>
-											<includes>element-list, package-list</includes>
-											<outputDirectory>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</outputDirectory>
-										</artifactItem>
-									</artifactItems>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
-						<configuration>
-							<offlineLinks combine.children="append">
-								<!-- Direct -->
-								<offlineLink>
-									<url>https://oss.aoapps.com/lang/apidocs/</url>
-									<location>${project.build.directory}/offlineLinks/com.aoapps/ao-lang</location>
-								</offlineLink>
-								<offlineLink>
-									<url>https://oss.aoapps.com/payments/api/apidocs/</url>
-									<location>${project.build.directory}/offlineLinks/com.aoapps/ao-payments-api</location>
-								</offlineLink>
-								<offlineLink>
-									<url>https://javadoc.io/doc/org.apache.commons/commons-lang3/${commons-lang3.version}/</url>
-									<location>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</location>
-								</offlineLink>
-							</offlineLinks>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+  <profiles>
+    <profile>
+      <id>offlineLinks</id><activation><file><exists>src/main/java</exists></file></activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>unpack.offlineLinks</id><phase>prepare-package</phase><goals><goal>unpack</goal></goals>
+                <configuration>
+                  <artifactItems>
+                    <!-- Direct -->
+                    <artifactItem>
+                      <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId><classifier>javadoc</classifier>
+                      <includes>element-list, package-list</includes>
+                      <outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-lang</outputDirectory>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>com.aoapps</groupId><artifactId>ao-payments-api</artifactId><classifier>javadoc</classifier>
+                      <includes>element-list, package-list</includes>
+                      <outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-payments-api</outputDirectory>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><classifier>javadoc</classifier>
+                      <includes>element-list, package-list</includes>
+                      <outputDirectory>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</outputDirectory>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <offlineLinks combine.children="append">
+                <!-- Direct -->
+                <offlineLink>
+                  <url>https://oss.aoapps.com/lang/apidocs/</url>
+                  <location>${project.build.directory}/offlineLinks/com.aoapps/ao-lang</location>
+                </offlineLink>
+                <offlineLink>
+                  <url>https://oss.aoapps.com/payments/api/apidocs/</url>
+                  <location>${project.build.directory}/offlineLinks/com.aoapps/ao-payments-api</location>
+                </offlineLink>
+                <offlineLink>
+                  <url>https://javadoc.io/doc/org.apache.commons/commons-lang3/${commons-lang3.version}/</url>
+                  <location>${project.build.directory}/offlineLinks/org.apache.commons/commons-lang3</location>
+                </offlineLink>
+              </offlineLinks>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
-	<dependencyManagement>
-		<dependencies>
-			<!-- Direct -->
-			<dependency>
-				<groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId><version>5.2.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
-			</dependency>
-			<dependency>
-				<groupId>com.aoapps</groupId><artifactId>ao-payments-api</artifactId><version>2.0.0${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${commons-lang3.version}</version>
-			</dependency>
-			<!-- Transitive -->
-			<dependency>
-				<groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId><version>3.0.0${POST-SNAPSHOT}</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId><version>1.9.4</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-collections</groupId><artifactId>commons-collections</artifactId><version>3.2.2</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-digester</groupId><artifactId>commons-digester</artifactId><version>2.1</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId><artifactId>commons-logging</artifactId><version>1.2</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-validator</groupId><artifactId>commons-validator</artifactId><version>1.7</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+  <dependencyManagement>
+    <dependencies>
+      <!-- Direct -->
+      <dependency>
+        <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId><version>5.2.0-SNAPSHOT<!-- ${POST-SNAPSHOT} --></version>
+      </dependency>
+      <dependency>
+        <groupId>com.aoapps</groupId><artifactId>ao-payments-api</artifactId><version>2.0.0${POST-SNAPSHOT}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>${commons-lang3.version}</version>
+      </dependency>
+      <!-- Transitive -->
+      <dependency>
+        <groupId>com.aoapps</groupId><artifactId>ao-collections</artifactId><version>3.0.0${POST-SNAPSHOT}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-beanutils</groupId><artifactId>commons-beanutils</artifactId><version>1.9.4</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId><artifactId>commons-collections</artifactId><version>3.2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-digester</groupId><artifactId>commons-digester</artifactId><version>2.1</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-logging</groupId><artifactId>commons-logging</artifactId><version>1.2</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-validator</groupId><artifactId>commons-validator</artifactId><version>1.7</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-	<dependencies>
-		<!-- Direct -->
-		<dependency>
-			<groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.aoapps</groupId><artifactId>ao-payments-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <!-- Direct -->
+    <dependency>
+      <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.aoapps</groupId><artifactId>ao-payments-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
+    </dependency>
+  </dependencies>
 </project>

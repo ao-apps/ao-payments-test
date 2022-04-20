@@ -58,464 +58,474 @@ import org.apache.commons.lang3.NotImplementedException;
  */
 public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
-	/**
-	 * A fast pseudo-random number generator for non-cryptographic purposes.
-	 */
-	private static final Random fastRandom = new Random(IoUtils.bufferToLong(new SecureRandom().generateSeed(Long.BYTES)));
+  /**
+   * A fast pseudo-random number generator for non-cryptographic purposes.
+   */
+  private static final Random fastRandom = new Random(IoUtils.bufferToLong(new SecureRandom().generateSeed(Long.BYTES)));
 
-	private final String providerId;
-	private final byte errorChance;
-	private final byte declineChance;
+  private final String providerId;
+  private final byte errorChance;
+  private final byte declineChance;
 
-	public TestMerchantServicesProvider(String providerId, byte errorChance, byte declineChance) {
-		this.providerId = providerId;
-		this.errorChance = errorChance;
-		this.declineChance = declineChance;
-	}
+  public TestMerchantServicesProvider(String providerId, byte errorChance, byte declineChance) {
+    this.providerId = providerId;
+    this.errorChance = errorChance;
+    this.declineChance = declineChance;
+  }
 
-	/**
-	 * @throws  NumberFormatException when can't parse errorChance or declineChance
-	 */
-	public TestMerchantServicesProvider(String providerId, String errorChance, String declineChance) throws NumberFormatException {
-		this(
-			providerId,
-			Byte.parseByte(errorChance),
-			Byte.parseByte(declineChance)
-		);
-	}
+  /**
+   * @throws  NumberFormatException when can't parse errorChance or declineChance
+   */
+  public TestMerchantServicesProvider(String providerId, String errorChance, String declineChance) throws NumberFormatException {
+    this(
+      providerId,
+      Byte.parseByte(errorChance),
+      Byte.parseByte(declineChance)
+    );
+  }
 
-	@Override
-	public String getProviderId() {
-		return providerId;
-	}
+  @Override
+  public String getProviderId() {
+    return providerId;
+  }
 
-	public byte getErrorChance() {
-		return errorChance;
-	}
+  public byte getErrorChance() {
+    return errorChance;
+  }
 
-	public byte getDeclineChance() {
-		return declineChance;
-	}
+  public byte getDeclineChance() {
+    return declineChance;
+  }
 
-	@Override
-	public SaleResult sale(TransactionRequest transactionRequest, CreditCard creditCard) {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) {
-			// Random error class
-			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = fastRandom.nextInt(3);
-			switch(randomInt) {
-				case 0: {
-					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-					break;
-				}
-				case 1: {
-					communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-					break;
-				}
-				case 2: {
-					communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-					break;
-				}
-				default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
-			}
+  @Override
+  public SaleResult sale(TransactionRequest transactionRequest, CreditCard creditCard) {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      // Random error class
+      TransactionResult.CommunicationResult communicationResult;
+      int randomInt = fastRandom.nextInt(3);
+      switch (randomInt) {
+        case 0: {
+          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+          break;
+        }
+        case 1: {
+          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+          break;
+        }
+        case 2: {
+          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+          break;
+        }
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+      }
 
-			// Random error code
-			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
+      // Random error code
+      TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
+      TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
-			return new SaleResult(
-				new AuthorizationResult(
-					getProviderId(),
-					communicationResult,
-					null,
-					errorCode,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null
-				),
-				new CaptureResult(
-					getProviderId(),
-					communicationResult,
-					null,
-					errorCode,
-					null,
-					null
-				)
-			);
-		}
+      return new SaleResult(
+        new AuthorizationResult(
+          getProviderId(),
+          communicationResult,
+          null,
+          errorCode,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ),
+        new CaptureResult(
+          getProviderId(),
+          communicationResult,
+          null,
+          errorCode,
+          null,
+          null
+        )
+      );
+    }
 
-		// Second allow for declines
-		if(fastRandom.nextInt(100) < declineChance) {
-			// Random decline reason
-			AuthorizationResult.DeclineReason[] values = AuthorizationResult.DeclineReason.values();
-			AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
+    // Second allow for declines
+    if (fastRandom.nextInt(100) < declineChance) {
+      // Random decline reason
+      AuthorizationResult.DeclineReason[] values = AuthorizationResult.DeclineReason.values();
+      AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
 
-			// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-			String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
+      // Random doesn't ensure uniquiness - but this is easily implemented without persistence
+      String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
-			return new SaleResult(
-				new AuthorizationResult(
-					getProviderId(),
-					TransactionResult.CommunicationResult.SUCCESS,
-					null,
-					null,
-					null,
-					providerUniqueId,
-					null,
-					null,
-					AuthorizationResult.ApprovalResult.DECLINED,
-					null,
-					declineReason,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null,
-					null
-				),
-				new CaptureResult(
-					getProviderId(),
-					TransactionResult.CommunicationResult.SUCCESS,
-					null,
-					null,
-					null,
-					providerUniqueId
-				)
-			);
-		}
+      return new SaleResult(
+        new AuthorizationResult(
+          getProviderId(),
+          TransactionResult.CommunicationResult.SUCCESS,
+          null,
+          null,
+          null,
+          providerUniqueId,
+          null,
+          null,
+          AuthorizationResult.ApprovalResult.DECLINED,
+          null,
+          declineReason,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ),
+        new CaptureResult(
+          getProviderId(),
+          TransactionResult.CommunicationResult.SUCCESS,
+          null,
+          null,
+          null,
+          providerUniqueId
+        )
+      );
+    }
 
-		// Simulate success
+    // Simulate success
 
-		// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-		String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
+    // Random doesn't ensure uniquiness - but this is easily implemented without persistence
+    String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
-		String approvalCode =
-			new StringBuilder()
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.toString();
+    String approvalCode =
+      new StringBuilder()
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .toString();
 
-		return new SaleResult(
-			new AuthorizationResult(
-				getProviderId(),
-				TransactionResult.CommunicationResult.SUCCESS,
-				null,
-				null,
-				null,
-				providerUniqueId,
-				null,
-				null,
-				AuthorizationResult.ApprovalResult.APPROVED,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				approvalCode
-			),
-			new CaptureResult(
-				getProviderId(),
-				TransactionResult.CommunicationResult.SUCCESS,
-				null,
-				null,
-				null,
-				providerUniqueId
-			)
-		);
-	}
+    return new SaleResult(
+      new AuthorizationResult(
+        getProviderId(),
+        TransactionResult.CommunicationResult.SUCCESS,
+        null,
+        null,
+        null,
+        providerUniqueId,
+        null,
+        null,
+        AuthorizationResult.ApprovalResult.APPROVED,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        approvalCode
+      ),
+      new CaptureResult(
+        getProviderId(),
+        TransactionResult.CommunicationResult.SUCCESS,
+        null,
+        null,
+        null,
+        providerUniqueId
+      )
+    );
+  }
 
-	@Override
-	public AuthorizationResult authorize(TransactionRequest transactionRequest, CreditCard creditCard) {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) {
-			// Random error class
-			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = fastRandom.nextInt(3);
-			switch(randomInt) {
-				case 0: {
-					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-					break;
-				}
-				case 1: {
-					communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-					break;
-				}
-				case 2: {
-					communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-					break;
-				}
-				default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
-			}
+  @Override
+  public AuthorizationResult authorize(TransactionRequest transactionRequest, CreditCard creditCard) {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      // Random error class
+      TransactionResult.CommunicationResult communicationResult;
+      int randomInt = fastRandom.nextInt(3);
+      switch (randomInt) {
+        case 0: {
+          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+          break;
+        }
+        case 1: {
+          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+          break;
+        }
+        case 2: {
+          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+          break;
+        }
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+      }
 
-			// Random error code
-			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
+      // Random error code
+      TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
+      TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
-			return new AuthorizationResult(
-				getProviderId(),
-				communicationResult,
-				null,
-				errorCode,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null
-			);
-		}
+      return new AuthorizationResult(
+        getProviderId(),
+        communicationResult,
+        null,
+        errorCode,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      );
+    }
 
-		// Second allow for declines
-		if(fastRandom.nextInt(100) < declineChance) {
-			// Random decline reason
-			AuthorizationResult.DeclineReason[] values = AuthorizationResult.DeclineReason.values();
-			AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
+    // Second allow for declines
+    if (fastRandom.nextInt(100) < declineChance) {
+      // Random decline reason
+      AuthorizationResult.DeclineReason[] values = AuthorizationResult.DeclineReason.values();
+      AuthorizationResult.DeclineReason declineReason = values[fastRandom.nextInt(values.length)];
 
-			// Random doesn't ensure uniquiness - but this is easily implemented without persistence
-			String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
+      // Random doesn't ensure uniquiness - but this is easily implemented without persistence
+      String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
-			return new AuthorizationResult(
-				getProviderId(),
-				TransactionResult.CommunicationResult.SUCCESS,
-				null,
-				null,
-				null,
-				providerUniqueId,
-				null,
-				null,
-				AuthorizationResult.ApprovalResult.DECLINED,
-				null,
-				declineReason,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null
-			);
-		}
+      return new AuthorizationResult(
+        getProviderId(),
+        TransactionResult.CommunicationResult.SUCCESS,
+        null,
+        null,
+        null,
+        providerUniqueId,
+        null,
+        null,
+        AuthorizationResult.ApprovalResult.DECLINED,
+        null,
+        declineReason,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      );
+    }
 
-		// Simulate success
+    // Simulate success
 
-		// Random doesn't ensure uniquiness - but this is an easy implementation not requiring persistence
-		String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
+    // Random doesn't ensure uniquiness - but this is an easy implementation not requiring persistence
+    String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
-		String approvalCode =
-			new StringBuilder()
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.append(fastRandom.nextInt(10))
-				.toString();
+    String approvalCode =
+      new StringBuilder()
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .append(fastRandom.nextInt(10))
+        .toString();
 
-		return new AuthorizationResult(
-			getProviderId(),
-			TransactionResult.CommunicationResult.SUCCESS,
-			null,
-			null,
-			null,
-			providerUniqueId,
-			null,
-			null,
-			AuthorizationResult.ApprovalResult.APPROVED,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			approvalCode
-		);
-	}
+    return new AuthorizationResult(
+      getProviderId(),
+      TransactionResult.CommunicationResult.SUCCESS,
+      null,
+      null,
+      null,
+      providerUniqueId,
+      null,
+      null,
+      AuthorizationResult.ApprovalResult.APPROVED,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      approvalCode
+    );
+  }
 
-	@Override
-	public CaptureResult capture(AuthorizationResult authorizationResult) {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) {
-			// Random error class
-			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = fastRandom.nextInt(3);
-			switch(randomInt) {
-				case 0: {
-					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-					break;
-				}
-				case 1: {
-					communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-					break;
-				}
-				case 2: {
-					communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-					break;
-				}
-				default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
-			}
+  @Override
+  public CaptureResult capture(AuthorizationResult authorizationResult) {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      // Random error class
+      TransactionResult.CommunicationResult communicationResult;
+      int randomInt = fastRandom.nextInt(3);
+      switch (randomInt) {
+        case 0: {
+          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+          break;
+        }
+        case 1: {
+          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+          break;
+        }
+        case 2: {
+          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+          break;
+        }
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+      }
 
-			// Random error code
-			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
+      // Random error code
+      TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
+      TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
-			return new CaptureResult(
-				getProviderId(),
-				communicationResult,
-				null,
-				errorCode,
-				null,
-				authorizationResult.getProviderUniqueId()
-			);
-		}
+      return new CaptureResult(
+        getProviderId(),
+        communicationResult,
+        null,
+        errorCode,
+        null,
+        authorizationResult.getProviderUniqueId()
+      );
+    }
 
-		// Simulate success
-		return new CaptureResult(
-			getProviderId(),
-			TransactionResult.CommunicationResult.SUCCESS,
-			null,
-			null,
-			null,
-			authorizationResult.getProviderUniqueId()
-		);
-	}
+    // Simulate success
+    return new CaptureResult(
+      getProviderId(),
+      TransactionResult.CommunicationResult.SUCCESS,
+      null,
+      null,
+      null,
+      authorizationResult.getProviderUniqueId()
+    );
+  }
 
-	@Override
-	public VoidResult voidTransaction(Transaction transaction) {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) {
-			// Random error class
-			TransactionResult.CommunicationResult communicationResult;
-			int randomInt = fastRandom.nextInt(3);
-			switch(randomInt) {
-				case 0: {
-					communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-					break;
-				}
-				case 1: {
-					communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-					break;
-				}
-				case 2: {
-					communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-					break;
-				}
-				default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
-			}
+  @Override
+  public VoidResult voidTransaction(Transaction transaction) {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      // Random error class
+      TransactionResult.CommunicationResult communicationResult;
+      int randomInt = fastRandom.nextInt(3);
+      switch (randomInt) {
+        case 0: {
+          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+          break;
+        }
+        case 1: {
+          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+          break;
+        }
+        case 2: {
+          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+          break;
+        }
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+      }
 
-			// Random error code
-			TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
-			TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
+      // Random error code
+      TransactionResult.ErrorCode[] values = TransactionResult.ErrorCode.values();
+      TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
-			return new VoidResult(
-				getProviderId(),
-				communicationResult,
-				null,
-				errorCode,
-				null,
-				transaction.getAuthorizationResult().getProviderUniqueId()
-			);
-		}
+      return new VoidResult(
+        getProviderId(),
+        communicationResult,
+        null,
+        errorCode,
+        null,
+        transaction.getAuthorizationResult().getProviderUniqueId()
+      );
+    }
 
-		// Simulate success
-		return new VoidResult(
-			getProviderId(),
-			TransactionResult.CommunicationResult.SUCCESS,
-			null,
-			null,
-			null,
-			transaction.getAuthorizationResult().getProviderUniqueId()
-		);
-	}
+    // Simulate success
+    return new VoidResult(
+      getProviderId(),
+      TransactionResult.CommunicationResult.SUCCESS,
+      null,
+      null,
+      null,
+      transaction.getAuthorizationResult().getProviderUniqueId()
+    );
+  }
 
-	@Override
-	public CreditResult credit(TransactionRequest transactionRequest, CreditCard creditCard) {
-		throw new NotImplementedException("TODO");
-	}
+  @Override
+  public CreditResult credit(TransactionRequest transactionRequest, CreditCard creditCard) {
+    throw new NotImplementedException("TODO");
+  }
 
-	@Override
-	public boolean canStoreCreditCards() {
-		return true;
-	}
+  @Override
+  public boolean canStoreCreditCards() {
+    return true;
+  }
 
-	@Override
-	public String storeCreditCard(CreditCard creditCard) throws IOException {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated storeCreditCard error");
+  @Override
+  public String storeCreditCard(CreditCard creditCard) throws IOException {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      throw new IOException("Test-mode simulated storeCreditCard error");
+    }
 
-		return Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
-	}
+    return Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
+  }
 
-	@Override
-	public void updateCreditCard(CreditCard creditCard) throws IOException {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated updateCreditCard error");
-	}
+  @Override
+  public void updateCreditCard(CreditCard creditCard) throws IOException {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      throw new IOException("Test-mode simulated updateCreditCard error");
+    }
+  }
 
-	@Override
-	public void updateCreditCardNumberAndExpiration(
-		CreditCard creditCard,
-		String cardNumber,
-		byte expirationMonth,
-		short expirationYear,
-		String cardCode
-	) throws IOException {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated updateCreditCardNumberAndExpiration error");
-	}
+  @Override
+  public void updateCreditCardNumberAndExpiration(
+    CreditCard creditCard,
+    String cardNumber,
+    byte expirationMonth,
+    short expirationYear,
+    String cardCode
+  ) throws IOException {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      throw new IOException("Test-mode simulated updateCreditCardNumberAndExpiration error");
+    }
+  }
 
-	@Override
-	public void updateCreditCardExpiration(
-		CreditCard creditCard,
-		byte expirationMonth,
-		short expirationYear
-	) throws IOException {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated updateCreditCardExpiration error");
-	}
+  @Override
+  public void updateCreditCardExpiration(
+    CreditCard creditCard,
+    byte expirationMonth,
+    short expirationYear
+  ) throws IOException {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      throw new IOException("Test-mode simulated updateCreditCardExpiration error");
+    }
+  }
 
-	@Override
-	public void deleteCreditCard(CreditCard creditCard) throws IOException {
-		// First allow for random errors
-		if(fastRandom.nextInt(100) < errorChance) throw new IOException("Test-mode simulated deleteCreditCard error");
-	}
+  @Override
+  public void deleteCreditCard(CreditCard creditCard) throws IOException {
+    // First allow for random errors
+    if (fastRandom.nextInt(100) < errorChance) {
+      throw new IOException("Test-mode simulated deleteCreditCard error");
+    }
+  }
 
-	@Override
-	public boolean canGetTokenizedCreditCards() {
-		return false;
-	}
+  @Override
+  public boolean canGetTokenizedCreditCards() {
+    return false;
+  }
 
-	@Override
-	public Map<String, TokenizedCreditCard> getTokenizedCreditCards(Map<String, CreditCard> persistedCards, PrintWriter verboseOut, PrintWriter infoOut, PrintWriter warningOut) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException();
-	}
+  @Override
+  public Map<String, TokenizedCreditCard> getTokenizedCreditCards(Map<String, CreditCard> persistedCards, PrintWriter verboseOut, PrintWriter infoOut, PrintWriter warningOut) throws UnsupportedOperationException {
+    throw new UnsupportedOperationException();
+  }
 }
