@@ -78,9 +78,9 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
    */
   public TestMerchantServicesProvider(String providerId, String errorChance, String declineChance) throws NumberFormatException {
     this(
-      providerId,
-      Byte.parseByte(errorChance),
-      Byte.parseByte(declineChance)
+        providerId,
+        Byte.parseByte(errorChance),
+        Byte.parseByte(declineChance)
     );
   }
 
@@ -117,7 +117,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -125,34 +125,34 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
       return new SaleResult(
-        new AuthorizationResult(
-          getProviderId(),
-          communicationResult,
-          null,
-          errorCode,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ),
-        new CaptureResult(
-          getProviderId(),
-          communicationResult,
-          null,
-          errorCode,
-          null,
-          null
-        )
+          new AuthorizationResult(
+              getProviderId(),
+              communicationResult,
+              null,
+              errorCode,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+          ),
+          new CaptureResult(
+              getProviderId(),
+              communicationResult,
+              null,
+              errorCode,
+              null,
+              null
+          )
       );
     }
 
@@ -166,34 +166,34 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
       return new SaleResult(
-        new AuthorizationResult(
-          getProviderId(),
-          TransactionResult.CommunicationResult.SUCCESS,
-          null,
-          null,
-          null,
-          providerUniqueId,
-          null,
-          null,
-          AuthorizationResult.ApprovalResult.DECLINED,
-          null,
-          declineReason,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ),
-        new CaptureResult(
-          getProviderId(),
-          TransactionResult.CommunicationResult.SUCCESS,
-          null,
-          null,
-          null,
-          providerUniqueId
-        )
+          new AuthorizationResult(
+              getProviderId(),
+              TransactionResult.CommunicationResult.SUCCESS,
+              null,
+              null,
+              null,
+              providerUniqueId,
+              null,
+              null,
+              AuthorizationResult.ApprovalResult.DECLINED,
+              null,
+              declineReason,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+          ),
+          new CaptureResult(
+              getProviderId(),
+              TransactionResult.CommunicationResult.SUCCESS,
+              null,
+              null,
+              null,
+              providerUniqueId
+          )
       );
     }
 
@@ -203,44 +203,44 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
     String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
     String approvalCode =
-      new StringBuilder()
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .toString();
+        new StringBuilder()
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .toString();
 
     return new SaleResult(
-      new AuthorizationResult(
-        getProviderId(),
-        TransactionResult.CommunicationResult.SUCCESS,
-        null,
-        null,
-        null,
-        providerUniqueId,
-        null,
-        null,
-        AuthorizationResult.ApprovalResult.APPROVED,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        approvalCode
-      ),
-      new CaptureResult(
-        getProviderId(),
-        TransactionResult.CommunicationResult.SUCCESS,
-        null,
-        null,
-        null,
-        providerUniqueId
-      )
+        new AuthorizationResult(
+            getProviderId(),
+            TransactionResult.CommunicationResult.SUCCESS,
+            null,
+            null,
+            null,
+            providerUniqueId,
+            null,
+            null,
+            AuthorizationResult.ApprovalResult.APPROVED,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            approvalCode
+        ),
+        new CaptureResult(
+            getProviderId(),
+            TransactionResult.CommunicationResult.SUCCESS,
+            null,
+            null,
+            null,
+            providerUniqueId
+        )
     );
   }
 
@@ -264,7 +264,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -272,24 +272,24 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
       return new AuthorizationResult(
-        getProviderId(),
-        communicationResult,
-        null,
-        errorCode,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+          getProviderId(),
+          communicationResult,
+          null,
+          errorCode,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
       );
     }
 
@@ -303,24 +303,24 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
       return new AuthorizationResult(
-        getProviderId(),
-        TransactionResult.CommunicationResult.SUCCESS,
-        null,
-        null,
-        null,
-        providerUniqueId,
-        null,
-        null,
-        AuthorizationResult.ApprovalResult.DECLINED,
-        null,
-        declineReason,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+          getProviderId(),
+          TransactionResult.CommunicationResult.SUCCESS,
+          null,
+          null,
+          null,
+          providerUniqueId,
+          null,
+          null,
+          AuthorizationResult.ApprovalResult.DECLINED,
+          null,
+          declineReason,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
       );
     }
 
@@ -330,34 +330,34 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
     String providerUniqueId = Long.toString(fastRandom.nextLong() & Long.MAX_VALUE, 16).toUpperCase();
 
     String approvalCode =
-      new StringBuilder()
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .append(fastRandom.nextInt(10))
-        .toString();
+        new StringBuilder()
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .append(fastRandom.nextInt(10))
+            .toString();
 
     return new AuthorizationResult(
-      getProviderId(),
-      TransactionResult.CommunicationResult.SUCCESS,
-      null,
-      null,
-      null,
-      providerUniqueId,
-      null,
-      null,
-      AuthorizationResult.ApprovalResult.APPROVED,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      approvalCode
+        getProviderId(),
+        TransactionResult.CommunicationResult.SUCCESS,
+        null,
+        null,
+        null,
+        providerUniqueId,
+        null,
+        null,
+        AuthorizationResult.ApprovalResult.APPROVED,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        approvalCode
     );
   }
 
@@ -381,7 +381,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -389,23 +389,23 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
       return new CaptureResult(
-        getProviderId(),
-        communicationResult,
-        null,
-        errorCode,
-        null,
-        authorizationResult.getProviderUniqueId()
+          getProviderId(),
+          communicationResult,
+          null,
+          errorCode,
+          null,
+          authorizationResult.getProviderUniqueId()
       );
     }
 
     // Simulate success
     return new CaptureResult(
-      getProviderId(),
-      TransactionResult.CommunicationResult.SUCCESS,
-      null,
-      null,
-      null,
-      authorizationResult.getProviderUniqueId()
+        getProviderId(),
+        TransactionResult.CommunicationResult.SUCCESS,
+        null,
+        null,
+        null,
+        authorizationResult.getProviderUniqueId()
     );
   }
 
@@ -429,7 +429,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: "+randomInt);
+        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -437,23 +437,23 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.ErrorCode errorCode = values[fastRandom.nextInt(values.length)];
 
       return new VoidResult(
-        getProviderId(),
-        communicationResult,
-        null,
-        errorCode,
-        null,
-        transaction.getAuthorizationResult().getProviderUniqueId()
+          getProviderId(),
+          communicationResult,
+          null,
+          errorCode,
+          null,
+          transaction.getAuthorizationResult().getProviderUniqueId()
       );
     }
 
     // Simulate success
     return new VoidResult(
-      getProviderId(),
-      TransactionResult.CommunicationResult.SUCCESS,
-      null,
-      null,
-      null,
-      transaction.getAuthorizationResult().getProviderUniqueId()
+        getProviderId(),
+        TransactionResult.CommunicationResult.SUCCESS,
+        null,
+        null,
+        null,
+        transaction.getAuthorizationResult().getProviderUniqueId()
     );
   }
 
@@ -487,11 +487,11 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
   @Override
   public void updateCreditCardNumberAndExpiration(
-    CreditCard creditCard,
-    String cardNumber,
-    byte expirationMonth,
-    short expirationYear,
-    String cardCode
+      CreditCard creditCard,
+      String cardNumber,
+      byte expirationMonth,
+      short expirationYear,
+      String cardCode
   ) throws IOException {
     // First allow for random errors
     if (fastRandom.nextInt(100) < errorChance) {
@@ -501,9 +501,9 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
 
   @Override
   public void updateCreditCardExpiration(
-    CreditCard creditCard,
-    byte expirationMonth,
-    short expirationYear
+      CreditCard creditCard,
+      byte expirationMonth,
+      short expirationYear
   ) throws IOException {
     // First allow for random errors
     if (fastRandom.nextInt(100) < errorChance) {
