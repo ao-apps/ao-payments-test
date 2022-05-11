@@ -44,15 +44,17 @@ import org.apache.commons.lang3.NotImplementedException;
 
 /**
  * Provider for testing software.
- * <br>
+ * <p>
  * Configuration parameters:
+ * </p>
  * <ol>
  *   <li>errorChance - percentage chance of some sort of error (during storeCard, payment, capture, void)</li>
  *   <li>declineChance - percentage chance of being declined, otherwise accepted (during payment)</li>
  * </ol>
- *
+ * <p>
  * TODO: Add AVS, CVV, and ReviewReason responses.
  * TODO: Add hold
+ * </p>
  *
  * @author  AO Industries, Inc.
  */
@@ -67,6 +69,9 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
   private final byte errorChance;
   private final byte declineChance;
 
+  /**
+   * Creates a new test provider with the given failure probabilities.
+   */
   public TestMerchantServicesProvider(String providerId, byte errorChance, byte declineChance) {
     this.providerId = providerId;
     this.errorChance = errorChance;
@@ -74,7 +79,7 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
   }
 
   /**
-   * @throws  NumberFormatException when can't parse errorChance or declineChance
+   * Creates a new test provider with the given failure probabilities, which are parsed via {@link Byte#parseByte(java.lang.String)}.
    */
   public TestMerchantServicesProvider(String providerId, String errorChance, String declineChance) throws NumberFormatException {
     this(
@@ -117,7 +122,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
+        default:
+          throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -264,7 +270,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
+        default:
+          throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -381,7 +388,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
+        default:
+          throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -429,7 +437,8 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
           communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
           break;
         }
-        default: throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
+        default:
+          throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
 
       // Random error code
@@ -525,7 +534,12 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
   }
 
   @Override
-  public Map<String, TokenizedCreditCard> getTokenizedCreditCards(Map<String, CreditCard> persistedCards, PrintWriter verboseOut, PrintWriter infoOut, PrintWriter warningOut) throws UnsupportedOperationException {
+  public Map<String, TokenizedCreditCard> getTokenizedCreditCards(
+      Map<String, CreditCard> persistedCards,
+      PrintWriter verboseOut,
+      PrintWriter infoOut,
+      PrintWriter warningOut
+  ) throws UnsupportedOperationException {
     throw new UnsupportedOperationException();
   }
 }
