@@ -26,4 +26,4 @@ module com.aoapps.payments.test {
   requires com.aoapps.lang; // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   requires com.aoapps.payments.api; // <groupId>com.aoapps</groupId><artifactId>ao-payments-api</artifactId>
   requires org.apache.commons.lang3; // <groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId>
-} // TODO: Avoiding rewrite-maven-plugin-4.22.2 truncation
+}
