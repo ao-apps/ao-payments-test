@@ -1,6 +1,6 @@
 /*
  * ao-payments-test - Provider for testing software.
- * Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2019, 2020, 2021, 2022, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -44,17 +44,16 @@ import org.apache.commons.lang3.NotImplementedException;
 
 /**
  * Provider for testing software.
- * <p>
- * Configuration parameters:
- * </p>
+ *
+ * <p>Configuration parameters:</p>
+ *
  * <ol>
  *   <li>errorChance - percentage chance of some sort of error (during storeCard, payment, capture, void)</li>
  *   <li>declineChance - percentage chance of being declined, otherwise accepted (during payment)</li>
  * </ol>
- * <p>
- * TODO: Add AVS, CVV, and ReviewReason responses.
- * TODO: Add hold
- * </p>
+ *
+ * <p>TODO: Add AVS, CVV, and ReviewReason responses.
+ * TODO: Add hold</p>
  *
  * @author  AO Industries, Inc.
  */
@@ -110,18 +109,21 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.CommunicationResult communicationResult;
       int randomInt = fastRandom.nextInt(3);
       switch (randomInt) {
-        case 0: {
-          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-          break;
-        }
-        case 1: {
-          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-          break;
-        }
-        case 2: {
-          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-          break;
-        }
+        case 0:
+          {
+            communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+            break;
+          }
+        case 1:
+          {
+            communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+            break;
+          }
+        case 2:
+          {
+            communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+            break;
+          }
         default:
           throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
@@ -258,18 +260,21 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.CommunicationResult communicationResult;
       int randomInt = fastRandom.nextInt(3);
       switch (randomInt) {
-        case 0: {
-          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-          break;
-        }
-        case 1: {
-          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-          break;
-        }
-        case 2: {
-          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-          break;
-        }
+        case 0:
+          {
+            communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+            break;
+          }
+        case 1:
+          {
+            communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+            break;
+          }
+        case 2:
+          {
+            communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+            break;
+          }
         default:
           throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
@@ -376,18 +381,21 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.CommunicationResult communicationResult;
       int randomInt = fastRandom.nextInt(3);
       switch (randomInt) {
-        case 0: {
-          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-          break;
-        }
-        case 1: {
-          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-          break;
-        }
-        case 2: {
-          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-          break;
-        }
+        case 0:
+          {
+            communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+            break;
+          }
+        case 1:
+          {
+            communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+            break;
+          }
+        case 2:
+          {
+            communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+            break;
+          }
         default:
           throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
@@ -425,18 +433,21 @@ public class TestMerchantServicesProvider implements MerchantServicesProvider {
       TransactionResult.CommunicationResult communicationResult;
       int randomInt = fastRandom.nextInt(3);
       switch (randomInt) {
-        case 0: {
-          communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
-          break;
-        }
-        case 1: {
-          communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
-          break;
-        }
-        case 2: {
-          communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
-          break;
-        }
+        case 0:
+          {
+            communicationResult = TransactionResult.CommunicationResult.LOCAL_ERROR;
+            break;
+          }
+        case 1:
+          {
+            communicationResult = TransactionResult.CommunicationResult.IO_ERROR;
+            break;
+          }
+        case 2:
+          {
+            communicationResult = TransactionResult.CommunicationResult.GATEWAY_ERROR;
+            break;
+          }
         default:
           throw new RuntimeException("random.nextInt(3) didn't return value between 0 and 2 inclusive: " + randomInt);
       }
