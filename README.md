@@ -22,7 +22,7 @@ Provider for testing software.
 * [Project Home](https://oss.aoapps.com/payments/test/)
 * [Changelog](https://oss.aoapps.com/payments/test/changelog)
 * [API Docs](https://oss.aoapps.com/payments/test/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-payments-test)
+* [Central Repository](https://central.sonatype.com/artifact/com.aoapps/ao-payments-test)
 * [GitHub](https://github.com/ao-apps/ao-payments-test)
 
 ## Contact Us
